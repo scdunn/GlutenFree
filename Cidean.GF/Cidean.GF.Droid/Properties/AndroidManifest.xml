@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Gluten_Free_Me.Gluten_Free_Me" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="15" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<application android:label="Gluten Free Me"></application>
+</manifest>
