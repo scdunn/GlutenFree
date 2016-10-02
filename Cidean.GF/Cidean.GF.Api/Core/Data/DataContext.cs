@@ -20,6 +20,11 @@ namespace Cidean.GF.Api.Core.Data
                 .IsRequired();
 
             Property(p => p.Name);
+            Property(p => p.Address);
+            Property(p => p.Phone);
+            Property(p => p.Url);
+            Property(p => p.LocationUrl);
+            Property(p => p.Rating);
 
             ToTable("Business");
 

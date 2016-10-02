@@ -18,5 +18,7 @@ namespace Cidean.GF.Api.Controllers
             return work.Businesses.GetAll();
         }
 
+        
+
     }
 }

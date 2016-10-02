@@ -13,7 +13,7 @@ namespace Cidean.GF.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ResultsPageViewModel>();
         }
 
         /// <summary>
@@ -22,11 +22,11 @@ namespace Cidean.GF.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
+        public ResultsPageViewModel Results
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<ResultsPageViewModel>();
             }
         }
     }

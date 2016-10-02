@@ -109,6 +109,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BusinessesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ImportBusinessesController.cs" />
     <Compile Include="Core\Data\ClassifiedAdsRepository.cs" />
     <Compile Include="Core\Data\DataContext.cs" />
     <Compile Include="Core\Data\Repository.cs" />

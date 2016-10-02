@@ -8,12 +8,11 @@ using Xamarin.Forms;
 
 namespace Cidean.GF
 {
-    public partial class MyPage : ContentPage
+    public partial class HomePage : TabbedPage
     {
-        public MyPage()
+        public HomePage()
         {
             InitializeComponent();
-            BindingContext = App.Locator.Main;
         }
     }
 }

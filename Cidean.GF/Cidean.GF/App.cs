@@ -27,7 +27,7 @@ namespace Cidean.GF
 
         public static Page GetMainPage()
         {
-            return new MyPage();
+            return new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()

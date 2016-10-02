@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Cidean.GF.Models;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using System;
@@ -10,56 +11,35 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Data.Json;
+using Xamarin.Forms;
 
 namespace Cidean.GF.ViewModel
 {
 
-    public class Business
+
+
+    public class ResultsPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+            
 
-    public class MainViewModel : ViewModelBase, INotifyPropertyChanged
-    {
-        /// <summary>
-        /// The <see cref="ClickCount" /> property's name.
-        /// </summary>
-        public const string ClickCountPropertyName = "ClickCount";
-
-        private int _clickCount;
-           
-
-        /// <summary>
-        /// Sets and gets the ClickCount property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
-        public int ClickCount
+        private Business _selectedItem;
+        public Business SelectedItem
         {
-            get
-            {
-                return _clickCount;
-            }
+            get { return _selectedItem; }
             set
             {
-                if (Set(() => ClickCount, ref _clickCount, value))
+                if (_selectedItem != value)
                 {
-                    RaisePropertyChanged(() => ClickCountFormatted);
+                    _selectedItem = value;
+                    RaisePropertyChanged(() => SelectedItem);
+                    //App.Current.MainPage.DisplayAlert("Alert", _selectedItem.Name + "  " + _selectedItem.Address, "Cancel");
+
+                    App.Current.MainPage.Navigation.PushAsync(new BusinessDetailPage(_selectedItem));
                 }
-
             }
         }
 
-        public string ClickCountFormatted
-        {
-            get
-            {
-                return string.Format("The button was clicked {0} time(s)", ClickCount);
-            }
-        }
-
-
-
+    
         private ObservableCollection<Business> _locations;
 
         public ObservableCollection<Business> Locations
@@ -107,53 +87,31 @@ namespace Cidean.GF.ViewModel
             }
        
      }
+                
 
-private RelayCommand _incrementCommand;
-
-        /// <summary>
-        /// Gets the IncrementCommand.
-        /// </summary>
-        public RelayCommand IncrementCommand
-        {
-            get
-            {
-                return _incrementCommand
-                    ?? (_incrementCommand = new RelayCommand(
-                    () =>
-                    {
-                        ClickCount++;
-                    }));
-            }
-        }
-
-        public RelayCommand ItemClicked
-        {
-            get
-            {
-                return new RelayCommand(() => {
-                    App.Current.MainPage.DisplayAlert("Clicked", "Item was clicked", "Cancel");
-                }
-                );
-
-            }
-        }
-
-        public void AddNewLocation()
-        {
-            GetBusinesses();
-            RaisePropertyChanged(() => Locations);
-        }
-
-        public RelayCommand AddLocation
+        public RelayCommand RefreshResults
         {
             get
             {
 
                 return new RelayCommand(() =>
                 {
-                    AddNewLocation();
+                    GetBusinesses();
+                    RaisePropertyChanged(() => Locations);
                 });
            }
+        }
+
+        public RelayCommand ShowAbout
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    App.Current.MainPage.Navigation.PushAsync(new About());
+                });
+            }
+
         }
     }
 }
